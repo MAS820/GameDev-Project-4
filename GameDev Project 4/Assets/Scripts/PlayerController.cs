@@ -34,12 +34,19 @@ public class PlayerController : MonoBehaviour {
 
 
 		//Crouching
-		if (Input.GetButtonUp ("Crouch")) {
-			if(isCrouching){
+		if (Input.GetButtonUp ("Crouch")) {									//If Q is pressed the player will crouch
+			if(isCrouching){												//and if it is pressed again the player will uncrouch
 				isCrouching = false;
+				this.transform.localScale = this.transform.localScale * 2;	//If uncrouched set Player scale back to normal
 			}else{
 				isCrouching = true;
+				this.transform.localScale = this.transform.localScale / 2;	//If crouched set Player scale to be half it's normal size
 			}	
+		}
+
+		if (isCrouching) {													//If crouching movement is half it's normal speed
+			horizontalSpeed = horizontalSpeed / 2;
+			verticalSpeed = verticalSpeed / 2;
 		}
 
 
