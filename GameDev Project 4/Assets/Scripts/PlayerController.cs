@@ -3,12 +3,16 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
+
 	//Editable in editor
 	public float speed = 3.0f;			//Adjust player walking speed
-	public float rotateSpeed = 3.0f;	//Adjust camera rotation speed/sensitivity
+	public float rotateSpeed = 3.0f;    //Adjust camera rotation speed/sensitivity
 
-	//Local Variables
-	private bool isSprinting;
+    //visibility flag variable
+    public bool isVisible;
+
+    //Local Variables
+    private bool isSprinting;
 	private bool isCrouching;
 
 	//Might come back and initialize all variables in Start
