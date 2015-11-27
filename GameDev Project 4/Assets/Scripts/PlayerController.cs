@@ -11,13 +11,16 @@ public class PlayerController : MonoBehaviour {
     //visibility flag variable
     public bool isVisible;
 
-    //Local Variables
-    private bool isSprinting;
+	//The game object that the player fires
+	public GameObject projectile;
+	public GameObject projectileLocation;
+
+	//Local Variables
+	private bool isSprinting;
 	private bool isCrouching;
 
 	//Might come back and initialize all variables in Start
 	void Start() {
-
 	}
 
 	// Update is called once per frame
@@ -61,9 +64,15 @@ public class PlayerController : MonoBehaviour {
 			isSprinting = true;
 		}
 
-
+		//Applying movement to the player controller
 		controller.SimpleMove (forward * verticalSpeed);					//Foward and backward movement
 		controller.SimpleMove (right * horizontalSpeed);					//Side to side movement
+
+		//Fire Projectiles
+		if (Input.GetButtonDown ("Fire1")) {
+			//creates an instance of GameObject projectile based on the location and rotation of GameObject projectileLocation
+			Instantiate(projectile, projectileLocation.transform.position , projectileLocation.transform.rotation);
+		}
 
 	}
 }
