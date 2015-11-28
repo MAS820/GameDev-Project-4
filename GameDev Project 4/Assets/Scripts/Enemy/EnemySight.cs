@@ -37,6 +37,7 @@ public class EnemySight : MonoBehaviour {
         }
         	
 	}
+
     void OnTriggerStay (Collider other)
     {
         if (other.gameObject == player)

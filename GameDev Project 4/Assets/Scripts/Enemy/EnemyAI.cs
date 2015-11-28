@@ -49,9 +49,9 @@ public class EnemyAI : MonoBehaviour {
         
         //Point the enemy at that waypoint
         transform.LookAt(waypoint);
-
+        nav.destination = waypoint;
         //Move enemy towards the point
-        transform.position += transform.TransformDirection(Vector3.forward) * patrolSpeed * Time.deltaTime;
+        //transform.position += transform.TransformDirection(Vector3.forward) * patrolSpeed * Time.deltaTime;
         Debug.Log(wayPointIndex);
 
         //IF enemy is close to point, begin to move to next point
@@ -72,7 +72,10 @@ public class EnemyAI : MonoBehaviour {
    
     void Update()
     {
-        Patrolling();
+        if (!enemySight.playerInSight)
+        {
+            Patrolling();
+        }
 
     }
 
