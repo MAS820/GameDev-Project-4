@@ -35,19 +35,18 @@ public class EnemyAI : MonoBehaviour {
 
         //Set the first waypoint
         wayPointIndex = 0;
-
         //Get the list of waypoint objects.
-        wayPoints = GameObject.FindGameObjectsWithTag("Waypoint");
+        wayPoints = GameObject.FindGameObjectsWithTag("CyclopsWaypoint");
 
-        
+
     }
-	
-	// Update is called once per frame
+
+    // Update is called once per frame
     void Patrolling()
     {
         //Get the position of the first waypoint
         waypoint = wayPoints[wayPointIndex].transform.position;
-
+        
         //Point the enemy at that waypoint
         transform.LookAt(waypoint);
 
