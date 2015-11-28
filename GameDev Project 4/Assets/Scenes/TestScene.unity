@@ -408,8 +408,8 @@ GameObject:
   - 108: {fileID: 1252718901}
   - 114: {fileID: 1252718902}
   m_Layer: 0
-  m_Name: light_Lamp
-  m_TagString: Untagged
+  m_Name: lampLight1
+  m_TagString: MainLights
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -469,6 +469,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd8300ff183dfca4c891b9b1c2e0f6bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeSpeed: 2
+  highIntensity: 2
+  lowIntensity: .5
+  changeMargin: .200000003
+  range: 10
 --- !u!1 &1726244196
 GameObject:
   m_ObjectHideFlags: 0
@@ -481,7 +486,7 @@ GameObject:
   - 136: {fileID: 1726244198}
   - 23: {fileID: 1726244197}
   m_Layer: 0
-  m_Name: mat_Lamp
+  m_Name: Lamp1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
