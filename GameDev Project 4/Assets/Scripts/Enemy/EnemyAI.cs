@@ -17,6 +17,7 @@ public class EnemyAI : MonoBehaviour {
     private GameObject player;
     private GameObject enemy;
 
+    private float patrolTimer;
     private int wayPointIndex;
 	// Use this for initialization
 	void Start () {
@@ -46,8 +47,26 @@ public class EnemyAI : MonoBehaviour {
     {
         //Get the position of the first waypoint
         waypoint = wayPoints[wayPointIndex].transform.position;
+        nav.speed = patrolSpeed;
+        if (true || nav.remainingDistance < nav.stoppingDistance)
+        {
+                        nav.destination = waypoint;
+
+             //If we reach the end of the list, start over
+             if (wayPointIndex == wayPoints.Length - 1)
+                {
+                    wayPointIndex = 0;
+                }
+                //Otherwise, we go through the list.
+                else
+                {
+                    wayPointIndex++;
+                }
+            
+            Debug.Log(wayPointIndex);
+        }
         
-        //Point the enemy at that waypoint
+     /*   //Point the enemy at that waypoint
         transform.LookAt(waypoint);
         nav.destination = waypoint;
         //Move enemy towards the point
@@ -56,27 +75,16 @@ public class EnemyAI : MonoBehaviour {
 
         //IF enemy is close to point, begin to move to next point
         float distance = Vector3.Distance(waypoint, enemy.transform.position);
-        if (distance <= 3)
+        if (distance <= 1)
         {
-            //If we reach the end of the list, start over
-            if (wayPointIndex == wayPoints.Length - 1)
-            {
-                wayPointIndex = 0;
-            }
-            //Otherwise, we go through the list.
-            else {
-                wayPointIndex++;
-            }
-        }
+          
+        }*/
     }
    
     void Update()
     {
-        if (!enemySight.playerInSight)
-        {
             Patrolling();
-        }
-
+    
     }
 
 }
