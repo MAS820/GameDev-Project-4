@@ -18,6 +18,8 @@ public class EnemyAI : MonoBehaviour {
     private GameObject enemy;
 
     private float patrolTimer;
+    private float chaseTimer;
+
     private int wayPointIndex;
 	// Use this for initialization
 	void Start () {
@@ -43,14 +45,45 @@ public class EnemyAI : MonoBehaviour {
     }
 
     // Update is called once per frame
+    void Chasing()
+    {
+        //set speed;
+        nav.speed = chaseSpeed;
+
+        //Get the position of the player. Get the delta vector between player / enemy
+        Vector3 sightingDeltaPos = enemySight.previousSighting - transform.position;
+
+        //Get the magnitude of the vector (distance)
+        if (sightingDeltaPos.sqrMagnitude > 4f)
+        {
+            //Tell enemy to walk to player location
+            nav.destination = enemySight.previousSighting;
+        }
+
+        //If we're nearing the destination, add to chase timer.
+        if (nav.remainingDistance < nav.stoppingDistance)
+        {
+            chaseTimer += Time.deltaTime;
+            //Chasing cooldown, ensures that monster continues moving
+            if (chaseTimer >= chaseWaitTime)
+            {
+                chaseTimer = 0f;
+            }
+        }
+        else
+        {
+            chaseTimer = 0f;
+        }
+    }
+
     void Patrolling()
     {
         //Get the position of the first waypoint
         waypoint = wayPoints[wayPointIndex].transform.position;
         nav.speed = patrolSpeed;
-        if (true || nav.remainingDistance < nav.stoppingDistance)
+        if (nav.remainingDistance < nav.stoppingDistance)
         {
-                        nav.destination = waypoint;
+             nav.destination = waypoint;
 
              //If we reach the end of the list, start over
              if (wayPointIndex == wayPoints.Length - 1)
@@ -62,28 +95,21 @@ public class EnemyAI : MonoBehaviour {
                 {
                     wayPointIndex++;
                 }
-            
-            Debug.Log(wayPointIndex);
         }
-        
-     /*   //Point the enemy at that waypoint
-        transform.LookAt(waypoint);
-        nav.destination = waypoint;
-        //Move enemy towards the point
-        //transform.position += transform.TransformDirection(Vector3.forward) * patrolSpeed * Time.deltaTime;
-        Debug.Log(wayPointIndex);
-
-        //IF enemy is close to point, begin to move to next point
-        float distance = Vector3.Distance(waypoint, enemy.transform.position);
-        if (distance <= 1)
-        {
-          
-        }*/
-    }
+            }
    
     void Update()
     {
+        if (!enemySight.playerInSight)
+        {
             Patrolling();
+            //Debug.Log("Not Seen");
+        }
+        else
+        {
+            Chasing();
+            //Debug.Log("seen");
+        }
     
     }
 

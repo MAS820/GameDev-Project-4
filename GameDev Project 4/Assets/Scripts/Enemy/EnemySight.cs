@@ -2,9 +2,8 @@
 using System.Collections;
 //Still working on this one, will clean up.
 public class EnemySight : MonoBehaviour {
-    public float fieldOfViewAngle = 110f;
+    public float fieldOfViewAngle = 120f;
     public bool playerInSight;
-    public Vector3 playerLastSeen;
     public bool gameOver;
 
     Light currentLight;
@@ -14,7 +13,7 @@ public class EnemySight : MonoBehaviour {
     private GameObject player;
     private GameObject enemy;
     private Animator playerAnim;
-    private Vector3 previousSighting;
+    public Vector3 previousSighting;
     
 
     // Use this for initialization
@@ -45,6 +44,7 @@ public class EnemySight : MonoBehaviour {
             playerInSight = false;
             Vector3 direction = other.transform.position - transform.position;
             float angle = Vector3.Angle(direction, transform.forward);
+           // Debug.Log(angle);
             if (angle < fieldOfViewAngle * 0.5f)
             {
                 RaycastHit hit;
@@ -54,8 +54,8 @@ public class EnemySight : MonoBehaviour {
                     {
                         //player is seen
                         playerInSight = true;
-                       // enemy.transform.position = player.transform.position;
                         previousSighting = player.transform.position;
+                        
                     }
                 }
             }
