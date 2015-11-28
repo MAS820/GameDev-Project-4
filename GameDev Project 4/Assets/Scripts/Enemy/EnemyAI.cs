@@ -5,7 +5,7 @@ public class EnemyAI : MonoBehaviour {
     //Editables //some variables will be used later for animation and navigational mesh
     public float patrolSpeed = 2f;
     public float chaseSpeed = 5f;
-    public float chaseWaitTime = 5f;
+    public float chaseWaitTime = 4f;
     public float patrolWaitTime = 1f;
 
     public Vector3[] patrolWayPoints;
@@ -57,7 +57,7 @@ public class EnemyAI : MonoBehaviour {
         if (sightingDeltaPos.sqrMagnitude > 4f)
         {
             //Tell enemy to walk to player location
-            nav.destination = enemySight.previousSighting;
+            nav.destination = player.transform.position;//enemySight.previousSighting;
         }
 
         //If we're nearing the destination, add to chase timer.
