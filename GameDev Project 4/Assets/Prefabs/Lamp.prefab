@@ -11,8 +11,8 @@ GameObject:
   - 108: {fileID: 10821744}
   - 114: {fileID: 11408854}
   m_Layer: 0
-  m_Name: light_Lamp
-  m_TagString: Untagged
+  m_Name: lampLight
+  m_TagString: MainLights
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,7 +29,7 @@ GameObject:
   - 136: {fileID: 13697718}
   - 23: {fileID: 2375198}
   m_Layer: 0
-  m_Name: mesh_Lamp
+  m_Name: Lamp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -136,6 +136,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd8300ff183dfca4c891b9b1c2e0f6bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeSpeed: 2
+  highIntensity: 2
+  lowIntensity: .5
+  changeMargin: .200000003
+  range: 10
+  playerDetected: 0
 --- !u!136 &13697718
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -155,7 +161,15 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Name
+      value: lampLight
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: MainLights
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 175972}
