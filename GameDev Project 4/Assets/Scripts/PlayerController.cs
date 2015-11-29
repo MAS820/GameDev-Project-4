@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour {
 	//Editable in editor
 	public float speed = 3.0f;			//Adjust player walking speed
 	public float rotateSpeed = 3.0f;    //Adjust camera rotation speed/sensitivity
-    public float staminaMax = 10.0f;
+    public float staminaMax = 50.0f;
     public float stamina;
 
     //visibility flag variable
@@ -20,7 +20,6 @@ public class PlayerController : MonoBehaviour {
 	//Local Variables
 	private bool isSprinting;
 	private bool isCrouching;
-    //private float stamina;
 
 	//Might come back and initialize all variables in Start
 	void Start() {
@@ -91,12 +90,12 @@ public class PlayerController : MonoBehaviour {
 
     void DepleteStamina()
     {
-        stamina -= 2.0f * Time.deltaTime;
+        stamina -= 10.0f * Time.deltaTime;
     }
     
     void RefillStamina()
     {
         if(stamina < staminaMax)
-        stamina += 1.0f * Time.deltaTime;
+        stamina += 10.0f * Time.deltaTime;
     }
 }
