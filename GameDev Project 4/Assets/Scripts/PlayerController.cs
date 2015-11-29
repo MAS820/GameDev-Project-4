@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour {
 	//Editable in editor
 	public float speed = 3.0f;			//Adjust player walking speed
 	public float rotateSpeed = 3.0f;    //Adjust camera rotation speed/sensitivity
+    public float staminaMax = 10.0f;
+    public float stamina;
 
     //visibility flag variable
     public bool isVisible;
@@ -18,9 +20,11 @@ public class PlayerController : MonoBehaviour {
 	//Local Variables
 	private bool isSprinting;
 	private bool isCrouching;
+    //private float stamina;
 
 	//Might come back and initialize all variables in Start
 	void Start() {
+        stamina = staminaMax;
 	}
 
 	// Update is called once per frame
@@ -58,7 +62,7 @@ public class PlayerController : MonoBehaviour {
 
 
 		//Sprinting															//If left shift is held down 
-		if (Input.GetButton ("Sprint") && !isCrouching) {					//and the player is not crouching, they will move twice
+		if (Input.GetButton ("Sprint") && !isCrouching && stamina > 0) {	//and the player is not crouching, they will move twice
 			verticalSpeed = verticalSpeed * 2;								//their normal speed and isSprinting = true
 			horizontalSpeed = horizontalSpeed * 2;							//otherwise isSprinting = false
 			isSprinting = true;
@@ -74,5 +78,25 @@ public class PlayerController : MonoBehaviour {
 			Instantiate(projectile, projectileLocation.transform.position , projectileLocation.transform.rotation);
 		}
 
+        if(isSprinting)
+        {
+            DepleteStamina();
+        }
+        else if(!isSprinting && !Input.GetButton("Sprint"))
+        {
+            RefillStamina();
+        }
+
 	}
+
+    void DepleteStamina()
+    {
+        stamina -= 2.0f * Time.deltaTime;
+    }
+    
+    void RefillStamina()
+    {
+        if(stamina < staminaMax)
+        stamina += 1.0f * Time.deltaTime;
+    }
 }
